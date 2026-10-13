@@ -2,16 +2,36 @@
 
 @{
     ViewBag.Title = "Music Albums";
+    var categories = ViewBag.Categories as List<string> ?? new List<string>();
+    string selectedCategory = ViewBag.Category as string;
 }
 
 <h2>Music Albums</h2>
 
 @if (TempData["Message"] != null)
 {
-    <div class="alert-success">@TempData["Message"]</div>
+    <div class="alert alert-success">@TempData["Message"]</div>
 }
 
-<p>@Html.ActionLink("Add album", "Create")</p>
+@using (Html.BeginForm("Index", "Albums", FormMethod.Get, new { @class = "form-inline", style = "margin-bottom:15px" }))
+{
+    <label for="search">Search</label>
+    <input id="search" name="search" type="text" value="@(ViewBag.Search ?? "")" class="form-control" />
+    <label for="category">Genre</label>
+    <select id="category" name="category" class="form-control">
+        <option value="">All genres</option>
+        @foreach (string category in categories)
+        {
+            <option value="@category" @(category == selectedCategory ? "selected" : "")>@category</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-default">Search</button>
+}
+
+<p style="margin-top:15px">
+    @Html.ActionLink("Add album", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
 <p>Albums found: <b>@Model.Count()</b></p>
 
 <table class="table">
@@ -23,6 +43,7 @@
         <th>@Html.DisplayNameFor(model => model.Price)</th>
         <th></th>
     </tr>
+
     @foreach (var item in Model)
     {
         <tr>

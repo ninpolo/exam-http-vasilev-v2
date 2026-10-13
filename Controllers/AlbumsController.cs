@@ -9,12 +9,19 @@ namespace ExamMvc.Controllers
     {
         private readonly ExamContext db = new ExamContext();
 
+        [HttpGet]
         public ActionResult Index(string search, string category)
         {
             ViewBag.Categories = db.Albums.Select(x => x.Genre).Distinct().OrderBy(c => c).ToList();
             ViewBag.Search = search;
             ViewBag.Category = category;
-            return View(db.Albums.OrderBy(x => x.Title).ToList());
+            IQueryable<Album> albums = db.Albums;
+            if (!string.IsNullOrWhiteSpace(search))
+                albums = albums.Where(x => x.Title.Contains(search) || x.Artist.Contains(search));
+            if (!string.IsNullOrWhiteSpace(category))
+                albums = albums.Where(x => x.Genre == category);
+
+            return View(albums.OrderBy(x => x.Title).ToList());
         }
 
         public ActionResult Details(int? id)
