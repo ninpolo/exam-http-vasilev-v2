@@ -23,6 +23,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete album" class="btn btn-danger" /> |

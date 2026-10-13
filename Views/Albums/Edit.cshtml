@@ -9,6 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HttpMethodOverride(HttpVerbs.Put)
 
     <div class="form-horizontal">
         <hr />
