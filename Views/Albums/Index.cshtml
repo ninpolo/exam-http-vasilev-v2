@@ -1,0 +1,41 @@
+@model IEnumerable<ExamMvc.Models.Album>
+
+@{
+    ViewBag.Title = "Music Albums";
+}
+
+<h2>Music Albums</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert-success">@TempData["Message"]</div>
+}
+
+<p>@Html.ActionLink("Add album", "Create")</p>
+<p>Albums found: <b>@Model.Count()</b></p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Artist)</th>
+        <th>@Html.DisplayNameFor(model => model.Genre)</th>
+        <th>@Html.DisplayNameFor(model => model.Year)</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Artist)</td>
+            <td>@Html.DisplayFor(modelItem => item.Genre)</td>
+            <td>@Html.DisplayFor(modelItem => item.Year)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

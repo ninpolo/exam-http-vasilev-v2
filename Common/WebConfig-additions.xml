@@ -1,0 +1,17 @@
+<!-- Add these two elements as direct children of <configuration> in Web.config. -->
+<connectionStrings>
+  <add name="ExamContext"
+       connectionString="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ExamDb;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+<entityFramework>
+  <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework">
+    <parameters>
+      <parameter value="." />
+    </parameters>
+  </defaultConnectionFactory>
+  <providers>
+    <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+  </providers>
+</entityFramework>

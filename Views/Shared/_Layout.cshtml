@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - ExamMvc</title>
+    <style>
+        body { font-family: Segoe UI, Arial, sans-serif; margin: 2rem auto; max-width: 1000px; padding: 0 1rem; color: #20252b; }
+        a { color: #125e9b; } .table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border-bottom: 1px solid #d7dce1; padding: .65rem; text-align: left; }
+        label { margin-left: .7rem; } input, select, button { padding: .45rem; margin: .25rem; }
+        .alert-success { padding: .75rem; background: #e3f4e9; color: #145c2e; }
+        .text-danger, .validation-summary-errors { color: #a11; }
+        .form-group { margin: .65rem 0; } .form-actions { margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <header><p><a href="@Url.Action("Index", "Albums")">ExamMvc · Music Albums</a></p></header>
+    <main>@RenderBody()</main>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
